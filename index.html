@@ -248,6 +248,36 @@ footer{background:#0c2946}
  .hero-logo-mark img{transform:scale(1.9)}
  .hero-copy{padding-top:50px!important;padding-bottom:55px!important}
 }
+
+/* CORREZIONE LOGO: niente riquadro bianco, niente tagli */
+.hero-logo-mark{
+ width:190px!important;
+ height:190px!important;
+ padding:0!important;
+ margin:0 0 22px!important;
+ overflow:visible!important;
+ background:transparent!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ flex-shrink:0;
+}
+.hero-logo-mark img{
+ display:block!important;
+ width:190px!important;
+ height:190px!important;
+ object-fit:contain!important;
+ transform:scale(2.05)!important;
+ transform-origin:center center!important;
+ filter:drop-shadow(0 8px 18px rgba(0,0,0,.25))!important;
+}
+@media(max-width:700px){
+ .hero-logo-mark{width:145px!important;height:145px!important;margin-bottom:18px!important}
+ .hero-logo-mark img{width:145px!important;height:145px!important;transform:scale(2.05)!important}
+}
 </style></head><body>
 <header class="top"><a class="brand brand-logo" href="#inizio"><img alt="Dolso &amp; Busatto" src="assets/img/logo-vetreria.svg"/><span class="brand-wordmark">VETRERIA<br/><strong>DOLSO &amp; BUSATTO</strong></span></a><input aria-label="Cerca nel sito" class="search" id="search" placeholder="Cerca nel sito…" type="search"/><div class="search-results" id="searchResults"></div><button aria-label="Apri il menu" class="menu-btn" id="menuBtn"><span>MENU</span><span aria-hidden="true" class="dots">⋮</span></button></header>
 <div class="veil" id="veil"></div><nav aria-label="Menu delle lavorazioni" class="drawer" id="drawer"><button class="icon-btn close" id="closeMenu">Chiudi ×</button><h2>Le nostre lavorazioni</h2><a href="#servizi-di-vetreria">Servizi di vetreria</a><a href="#vetrocamera-e-vetri-speciali">Vetrocamera e vetri speciali</a><a href="#specchi">Specchi</a><a href="#balaustre">Balaustre</a><a href="#pensiline">Pensiline</a><a href="#box-doccia">Box doccia</a><a href="#complementi-d-arredo">Complementi d'arredo</a><a href="#porte-interne">Porte interne</a><a href="#pareti-in-vetro-e-divisori">Pareti in vetro e divisori</a><a href="#stampa-digitale-su-vetro">Stampa digitale su vetro</a><a href="#manutenzione">Manutenzione</a><a href="#chi-siamo">Chi siamo</a><a href="#contatti">Contatti</a></nav>
