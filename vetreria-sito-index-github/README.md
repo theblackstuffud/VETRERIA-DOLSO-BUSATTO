@@ -1,1 +1,0 @@
-Caricare index.html e assets/ nella radice del repository. GitHub Settings > Pages > Deploy from a branch > main / root. Le didascalie sono provvisorie: recuperare le originali dal vecchio sito. Verificare contenuti e contatti prima della pubblicazione definitiva.
