@@ -435,7 +435,38 @@ body.intro-running{overflow:hidden}
 .opening.scene-fade{transition:none!important}
 .opening.camera-through{background:transparent!important;pointer-events:none!important}
 @media(prefers-reduced-motion:reduce){.opening-scene,.opening-logo-flight{will-change:auto}}
-</style><link href="assets/img/favicon-vetreria.png" rel="icon" sizes="64x64" type="image/png"/><link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/></head><body><div aria-label="Animazione di apertura del sito" class="opening" id="opening"><div class="opening-scene"><div class="architectural-frame"><img alt="Logo ufficiale Vetreria Dolso &amp; Busatto" class="opening-logo opening-logo-behind" src="assets/img/logo-vetreria.svg"/><div class="architectural-sash sash-left"><span class="glass-pane"></span><span class="frame-rail frame-rail-top"></span><span class="frame-rail frame-rail-bottom"></span><span class="frame-rail frame-rail-side"></span><span class="frame-rail frame-rail-center"></span><span class="glass-highlight"></span><span class="sash-handle"></span></div><div class="architectural-sash sash-right"><span class="glass-pane"></span><span class="frame-rail frame-rail-top"></span><span class="frame-rail frame-rail-bottom"></span><span class="frame-rail frame-rail-side"></span><span class="frame-rail frame-rail-center"></span><span class="glass-highlight"></span><span class="sash-handle"></span></div></div></div><img alt="" aria-hidden="true" class="opening-logo-flight" src="assets/img/logo-vetreria.svg"/></div>
+
+/* Vetro realmente satinato: logo leggibile soltanto come sagoma dietro le ante */
+.opening{background:#b9c6cf!important}
+.architectural-frame{perspective:1250px!important;transform-style:preserve-3d!important}
+.architectural-sash{transform-style:preserve-3d!important;transform-origin:left center!important}
+.architectural-sash.sash-right{transform-origin:right center!important}
+.glass-pane{background:linear-gradient(112deg,rgba(222,232,236,.95),rgba(181,199,208,.92) 44%,rgba(233,239,241,.96))!important;backdrop-filter:blur(24px) saturate(.45)!important;-webkit-backdrop-filter:blur(24px) saturate(.45)!important;opacity:1!important}
+.opening-logo-behind{filter:blur(20px)!important;opacity:.6!important;transform:translate(-50%,-50%)!important}
+.opening-logo-flight{filter:none!important;z-index:10001!important}
+.opening-scene,.architectural-sash,.opening-logo-flight{backface-visibility:hidden;transform-style:preserve-3d}
+
+/* INTRO 3.0 — serramento PVC bianco e movimento di camera continuo */
+#opening{position:fixed!important;inset:0!important;z-index:99999!important;overflow:hidden!important;background:#e7edf0!important;opacity:1!important;pointer-events:all!important;contain:none!important}
+#opening .film-scene{position:absolute;inset:0;perspective:1500px;transform-origin:center center;will-change:transform,opacity;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 45%,#f8fafb 0%,#d8e1e7 70%,#b8c6d0 100%)}
+#opening .pvc-window{position:relative;width:min(75vw,830px);height:min(78vh,680px);min-height:280px;max-height:80vh;border:clamp(13px,2.2vw,26px) solid #f8f9fa;border-radius:4px;box-shadow:inset 0 0 0 2px #bcc7ce,0 0 0 2px #b7c3cc,0 12px 18px #516b7a28,0 30px 75px #354f6140;transform-style:preserve-3d;perspective:1700px;background:linear-gradient(135deg,#eef3f6,#cbd8e0)}
+#opening .pvc-window:before{content:'';position:absolute;inset:-15px;pointer-events:none;border:3px solid #ffffffb8;box-shadow:inset 0 0 0 2px #a9b7c2;z-index:6}
+#opening .pvc-reveal{position:absolute;inset:0;background:radial-gradient(ellipse,#ffffff 10%,#e3eaf0 100%);z-index:0}
+#opening .pvc-sash{position:absolute;top:0;width:50%;height:100%;transform-style:preserve-3d;backface-visibility:visible;will-change:transform;z-index:3;background:transparent;border:clamp(12px,2vw,24px) solid #f8f9fb;box-shadow:inset 0 0 0 2px #c7d0d7,inset 0 0 0 5px #eef1f3,0 3px 12px #536a7b45,0 0 0 1px #acb9c2}
+#opening .pvc-left{left:0;transform-origin:0 50%;border-right-width:clamp(13px,2vw,24px)}
+#opening .pvc-right{right:0;transform-origin:100% 50%;border-left-width:clamp(13px,2vw,24px)}
+#opening .pvc-frost{position:absolute;inset:0;background:linear-gradient(115deg,rgba(244,249,251,.74),rgba(205,220,230,.64) 43%,rgba(246,249,250,.80) 100%);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);box-shadow:inset 0 0 32px #ffffffab;overflow:hidden}
+#opening .pvc-frost:after{content:'';position:absolute;inset:0;background:linear-gradient(109deg,transparent 16%,#ffffff5a 23%,transparent 29%,transparent 67%,#fff5 73%,transparent 77%);opacity:.7}
+#opening .pvc-handle{position:absolute;top:48%;width:10px;height:65px;background:linear-gradient(90deg,#a8b4bc,#fff,#a9b4bc);border:1px solid #9ba9b2;border-radius:5px;box-shadow:2px 2px 6px #60778555;z-index:5}
+#opening .pvc-left .pvc-handle{right:8px}
+#opening .pvc-right .pvc-handle{left:8px}
+#opening .film-logo{position:fixed!important;left:0!important;top:0!important;width:min(46vw,370px)!important;height:min(46vw,370px)!important;max-width:none!important;max-height:none!important;object-fit:contain!important;opacity:1!important;z-index:2!important;filter:none!important;transform:none;transform-origin:0 0;will-change:transform}
+body.intro-running{overflow:hidden}
+body.intro-running header.top,body.intro-running main,body.intro-running footer,body.intro-running .drawer{filter:blur(15px);opacity:0;pointer-events:none}
+body.intro-revealing header.top,body.intro-revealing main,body.intro-revealing footer{transition:filter 1550ms ease,opacity 1550ms ease;filter:blur(0);opacity:1}
+@media(max-width:600px){#opening .pvc-window{width:90vw;height:64vh;min-height:300px}#opening .film-logo{width:min(70vw,310px)!important;height:min(70vw,310px)!important}#opening .pvc-handle{height:43px;width:7px}}
+@media(prefers-reduced-motion:reduce){body.intro-revealing header.top,body.intro-revealing main,body.intro-revealing footer{transition-duration:120ms}}
+</style><link href="assets/img/favicon-vetreria.png" rel="icon" sizes="64x64" type="image/png"/><link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/></head><body><div aria-label="Animazione di apertura del sito" class="opening" id="opening"><div class="film-scene"><div class="pvc-window"><div class="pvc-reveal"></div><div class="pvc-sash pvc-left"><div class="pvc-frost"></div><div class="pvc-handle"></div></div><div class="pvc-sash pvc-right"><div class="pvc-frost"></div><div class="pvc-handle"></div></div></div></div><img alt="Logo Vetreria Dolso &amp; Busatto" class="film-logo" src="assets/img/logo-vetreria.svg"/></div>
 <header class="top"><a class="brand brand-logo" href="#inizio"><img alt="Dolso &amp; Busatto" src="assets/img/logo-vetreria.svg"/><span class="brand-wordmark">VETRERIA<br/><strong>DOLSO &amp; BUSATTO</strong></span></a><div class="search-shell"><span aria-hidden="true" class="search-magnifier"><svg fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewbox="0 0 24 24" width="19"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg></span><input aria-label="Cerca nel sito" class="search" id="search" placeholder="Cerca una lavorazione…" type="search"/></div><div class="search-results" id="searchResults"></div><button aria-label="Apri il menu" class="menu-btn" id="menuBtn"><span class="menu-label">MENU</span><span aria-hidden="true" class="menu-lines"><i></i><i></i><i></i></span></button></header>
 <div class="veil" id="veil"></div><nav aria-label="Menu di navigazione" class="drawer" id="drawer"><button class="icon-btn close" id="closeMenu">Chiudi ×</button><a href="#chi-siamo">Chi siamo</a><a href="#contatti">Contatti</a><a href="#servizi-di-vetreria">Servizi di vetreria</a><a href="#vetrocamera-e-vetri-speciali">Vetrocamera e vetri speciali</a><a href="#specchi">Specchi</a><a href="#balaustre">Balaustre</a><a href="#pensiline">Pensiline</a><a href="#box-doccia">Box doccia</a><a href="#complementi-d-arredo">Complementi d'arredo</a><a href="#porte-interne">Porte interne</a><a href="#pareti-in-vetro-e-divisori">Pareti in vetro e divisori</a><a href="#stampa-digitale-su-vetro">Stampa digitale su vetro</a><a href="#manutenzione">Manutenzione</a></nav>
 <section class="hero" id="inizio"><div class="hero-copy"><span class="kicker">VETRERIA DOLSO &amp; BUSATTO · POVOLETTO</span><h1>LAVORAZIONI<br/>IN VETRO<br/>SU MISURA</h1><p>Nata nei primi anni '80 a Povoletto, la vetreria è specializzata nel trattamento e nella lavorazione del vetro.</p></div><img alt="Fotografia originale della lavorazione del vetro" class="hero-img" src="assets/img/vetrocamera-e-vetri-speciali/vetrocamera-e-vetri-speciali-02.jpg"/></section><div aria-label="Attività della vetreria" class="capability-strip"><div class="capability-item"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m21.3 8.7-6-6a1 1 0 0 0-1.4 0L2.7 13.9a1 1 0 0 0 0 1.4l6 6a1 1 0 0 0 1.4 0L21.3 10a1 1 0 0 0 0-1.4Z"></path><path d="m7.5 10.5 2 2m1-5 2 2m1-5 2 2m-11 7 2 2"></path></svg><span>LAVORAZIONI SU MISURA</span></div><div class="capability-item"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M2 18h20M4 18v-4a8 8 0 0 1 5-7.4V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.6A8 8 0 0 1 20 14v4M9 6.6V12m6-5.4V12"></path><path d="M4 18v2h16v-2"></path></svg><span>POSA IN OPERA</span></div><div class="capability-item"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg><span>ASSISTENZA E RIPARAZIONE</span></div></div>
@@ -582,57 +613,55 @@ search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();i
   section.appendChild(nav);
  });
 })();
-</script><script>(()=>{
- const overlay=document.getElementById('opening');
- const scene=overlay?.querySelector('.opening-scene');
- const left=overlay?.querySelector('.sash-left');
- const right=overlay?.querySelector('.sash-right');
- const behind=overlay?.querySelector('.opening-logo-behind');
- const flyer=overlay?.querySelector('.opening-logo-flight');
- const target=document.querySelector('.brand-logo img');
- if(!overlay||!scene||!left||!right||!behind||!flyer||!target)return;
- const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
- document.body.classList.add('intro-running');
- const wait=ms=>new Promise(r=>setTimeout(r,ms));
- const motion=(el,frames,duration,easing='cubic-bezier(.22,.61,.36,1)')=>
-  el.animate(frames,{duration,easing,fill:'forwards'}).finished;
- const finish=()=>{target.style.visibility='';overlay.remove();document.body.classList.remove('intro-running')};
- const box=el=>{const r=el.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height,cx:r.x+r.width/2,cy:r.y+r.height/2}};
- async function play(){
-  await Promise.race([document.fonts?.ready||Promise.resolve(),wait(350)]);
-  if(!target.complete)await Promise.race([new Promise(r=>target.addEventListener('load',r,{once:true})),wait(300)]);
-  const openingDuration=reduced?100:1800;
-  // One synchronized hinge motion for both leaves; no CSS keyframe hand-off.
-  await wait(reduced?0:260);
-  const easing='cubic-bezier(.38,.02,.16,1)';
-  const hinges=Promise.all([
-   motion(left,[{transform:'rotateY(0deg)'},{transform:'rotateY(-106deg)'}],openingDuration,easing),
-   motion(right,[{transform:'rotateY(0deg)'},{transform:'rotateY(106deg)'}],openingDuration,easing),
-   motion(behind,[{filter:'blur(10px)',opacity:.78},{filter:'blur(0px)',opacity:1}],openingDuration,'ease-out')
-  ]);
-  await hinges;
-  // A camera push through the open frame, rather than scaling a screenshot.
-  await motion(scene,[
-   {transform:'translate3d(0,0,0) scale(1)',opacity:1},
-   {transform:'translate3d(0,0,0) scale(1.55)',opacity:1,offset:.42},
-   {transform:'translate3d(0,0,0) scale(2.9)',opacity:0,offset:1}
-  ],reduced?90:1180,'cubic-bezier(.38,.02,.18,1)');
-  scene.style.visibility='hidden';
-  overlay.classList.add('camera-through');
-  // FLIP, in viewport coordinates: a single composited layer travels to the real header logo.
-  const end=box(target);const size=Math.min(innerWidth*.42,innerHeight*.45,430);
-  const start={x:(innerWidth-size)/2,y:(innerHeight-size)/2,w:size,h:size};
-  flyer.style.width=size+'px';flyer.style.height=size+'px';flyer.style.opacity='1';
-  flyer.style.transform=`translate3d(${start.x}px,${start.y}px,0) scale(1)`;
-  target.style.visibility='hidden';
-  const dx=end.x-start.x,dy=end.y-start.y,scale=end.w/size;
-  await motion(flyer,[
-   {transform:`translate3d(${start.x}px,${start.y}px,0) scale(1)`,offset:0},
-   {transform:`translate3d(${start.x+dx*.28}px,${start.y+dy*.16}px,0) scale(${1+(scale-1)*.12})`,offset:.25},
-   {transform:`translate3d(${start.x+dx*.72}px,${start.y+dy*.66}px,0) scale(${1+(scale-1)*.66})`,offset:.72},
-   {transform:`translate3d(${end.x}px,${end.y}px,0) scale(${scale})`,offset:1}
-  ],reduced?100:1450,'cubic-bezier(.42,0,.13,1)');
-  finish();
- }
- play().catch(finish);
-})();</script></body></html>
+</script><script>
+(()=>{
+const overlay=document.querySelector('#opening'), scene=overlay?.querySelector('.film-scene');
+const left=overlay?.querySelector('.pvc-left'),right=overlay?.querySelector('.pvc-right');
+const logo=overlay?.querySelector('.film-logo'),target=document.querySelector('.brand-logo img');
+if(!overlay||!scene||!left||!right||!logo||!target)return;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const ease='cubic-bezier(.42,0,.18,1)';
+const anim=(el,frames,duration,easing=ease)=>el.animate(frames,{duration,easing,fill:'forwards'}).finished;
+document.body.classList.add('intro-running');
+const box=el=>el.getBoundingClientRect();
+function transformTo(x,y,w,h,scale=1){return `translate3d(${x}px,${y}px,0) scale(${scale})`;}
+function finish(){target.style.visibility='';document.body.classList.remove('intro-running','intro-revealing');overlay.remove();}
+async function play(){
+ await Promise.race([document.fonts?.ready||Promise.resolve(),sleep(550)]);
+ if(!logo.complete)await Promise.race([new Promise(r=>logo.addEventListener('load',r,{once:true})),sleep(800)]);
+ const vw=innerWidth,vh=innerHeight;
+ const w=logo.offsetWidth,h=logo.offsetHeight;
+ const x=(vw-w)/2,y=(vh-h)/2;
+ logo.style.transform=transformTo(x,y,w,h);
+ target.style.visibility='hidden';
+ await sleep(reduced?0:380);
+ // Camera approaches the still-closed, frosted window. Logo does not change size.
+ await anim(scene,[{transform:'scale(1)'},{transform:'scale(1.10)'}],reduced?80:900,'cubic-bezier(.35,0,.23,1)');
+ // Two hinged white PVC sashes open. Frost belongs to the glass, not the logo.
+ await Promise.all([
+ anim(left,[{transform:'rotateY(0deg)'},{transform:'rotateY(-112deg)'}],reduced?100:1650,'cubic-bezier(.36,0,.18,1)'),
+ anim(right,[{transform:'rotateY(0deg)'},{transform:'rotateY(112deg)'}],reduced?100:1650,'cubic-bezier(.36,0,.18,1)')
+ ]);
+ // Dolly through: window moves out of frame; same fixed-size, sharp logo stays centered.
+ await anim(scene,[{transform:'scale(1.10)',opacity:1},{transform:'scale(2.8)',opacity:0}],reduced?80:950,'cubic-bezier(.4,0,.22,1)');
+ scene.style.visibility='hidden';
+ // Site fades in from blur while the one logo moves to the actual header target.
+ document.body.classList.add('intro-revealing');
+ await sleep(reduced?0:120);
+ const dest=box(target);
+ const sx=dest.width/w,sy=dest.height/h;
+ const dx=dest.left-x,dy=dest.top-y;
+ const motion=anim(logo,[
+  {transform:transformTo(x,y,w,h),offset:0},
+  {transform:transformTo(x+dx*.34,y+dy*.34,w,h,1+(sx-1)*.34),offset:.34},
+  {transform:transformTo(x+dx*.72,y+dy*.72,w,h,1+(sx-1)*.72),offset:.72},
+  {transform:transformTo(dest.left,dest.top,w,h,sx),offset:1}
+ ],reduced?120:1550,'cubic-bezier(.55,0,.18,1)');
+ const reveal=sleep(reduced?120:1570);
+ await Promise.all([motion,reveal]);
+ finish();
+}
+play().catch(finish);
+})();
+</script></body></html>
