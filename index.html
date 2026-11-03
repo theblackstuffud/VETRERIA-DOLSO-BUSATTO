@@ -419,7 +419,23 @@ body{background:var(--paper);color:var(--ink)}
 body.intro-running{overflow:hidden}
 @media(max-width:600px){.architectural-frame{inset:18px 10px}.sash-handle{right:12px}.sash-right .sash-handle{left:12px}}
 @media(prefers-reduced-motion:reduce){.opening.scene-opening .sash-left{animation-duration:1ms}.opening.scene-opening .sash-right{animation-duration:1ms}}
-</style><link href="assets/img/favicon-vetreria.png" rel="icon" sizes="64x64" type="image/png"/><link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/></head><body><div aria-label="Animazione di apertura del sito" class="opening" id="opening"><div class="opening-scene"><div class="architectural-frame"><div class="architectural-sash sash-left"><span class="glass-pane"></span><span class="frame-rail frame-rail-top"></span><span class="frame-rail frame-rail-bottom"></span><span class="frame-rail frame-rail-side"></span><span class="frame-rail frame-rail-center"></span><span class="glass-highlight"></span><span class="sash-handle"></span></div><div class="architectural-sash sash-right"><span class="glass-pane"></span><span class="frame-rail frame-rail-top"></span><span class="frame-rail frame-rail-bottom"></span><span class="frame-rail frame-rail-side"></span><span class="frame-rail frame-rail-center"></span><span class="glass-highlight"></span><span class="sash-handle"></span></div></div><img alt="Logo ufficiale Vetreria Dolso &amp; Busatto" class="opening-logo" src="assets/img/logo-vetreria.svg"/></div></div>
+
+/* INTRO CINEMATOGRAFICA 2.0: vetro satinato, profondità e camera dolly */
+.opening{overflow:hidden!important;background:#c8d4dd!important;contain:paint}
+.opening-scene{overflow:visible!important;transform-origin:50% 50%;will-change:transform,opacity;backface-visibility:hidden}
+.opening-scene:before{opacity:.25}
+.architectural-frame{isolation:isolate;transform-style:preserve-3d;box-shadow:0 0 0 3px #142634,0 22px 70px #0b203a66,inset 0 0 0 2px #a8bac5!important}
+.architectural-frame:before{z-index:0;background:radial-gradient(ellipse at 50% 48%,#f0f4f6,#9cb2c1 78%)!important}
+.opening-logo-behind{position:absolute!important;inset:0!important;top:50%!important;left:50%!important;width:clamp(220px,34vw,490px)!important;height:clamp(220px,34vw,490px)!important;opacity:.85!important;transform:translate(-50%,-50%)!important;filter:blur(9px) drop-shadow(0 12px 20px #18384c3d)!important;z-index:1!important;pointer-events:none}
+.architectural-sash{z-index:3!important;transform:rotateY(0);backface-visibility:hidden;will-change:transform;contain:layout style}
+.glass-pane{background:linear-gradient(108deg,#f2f5f1d9 0%,#c7d6dedf 21%,#e6eeefc9 39%,#a9c0cddd 65%,#f3f6f5de 100%)!important;backdrop-filter:blur(14px) saturate(.65)!important;-webkit-backdrop-filter:blur(14px) saturate(.65)!important;box-shadow:inset 0 0 85px #56748655,inset 0 0 0 1px #ffffffa0!important}
+.glass-highlight{background:linear-gradient(110deg,transparent 12%,#ffffff60 15%,transparent 21%,transparent 63%,#fff7 68%,transparent 73%)!important}
+.opening-logo-flight{position:fixed!important;left:0;top:0;width:1px;height:1px;object-fit:contain;z-index:30;opacity:0;pointer-events:none;transform-origin:top left;will-change:transform,opacity;filter:drop-shadow(0 8px 18px #142e4430)}
+.opening.scene-opening .sash-left,.opening.scene-opening .sash-right{animation:none!important}
+.opening.scene-fade{transition:none!important}
+.opening.camera-through{background:transparent!important;pointer-events:none!important}
+@media(prefers-reduced-motion:reduce){.opening-scene,.opening-logo-flight{will-change:auto}}
+</style><link href="assets/img/favicon-vetreria.png" rel="icon" sizes="64x64" type="image/png"/><link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/></head><body><div aria-label="Animazione di apertura del sito" class="opening" id="opening"><div class="opening-scene"><div class="architectural-frame"><img alt="Logo ufficiale Vetreria Dolso &amp; Busatto" class="opening-logo opening-logo-behind" src="assets/img/logo-vetreria.svg"/><div class="architectural-sash sash-left"><span class="glass-pane"></span><span class="frame-rail frame-rail-top"></span><span class="frame-rail frame-rail-bottom"></span><span class="frame-rail frame-rail-side"></span><span class="frame-rail frame-rail-center"></span><span class="glass-highlight"></span><span class="sash-handle"></span></div><div class="architectural-sash sash-right"><span class="glass-pane"></span><span class="frame-rail frame-rail-top"></span><span class="frame-rail frame-rail-bottom"></span><span class="frame-rail frame-rail-side"></span><span class="frame-rail frame-rail-center"></span><span class="glass-highlight"></span><span class="sash-handle"></span></div></div></div><img alt="" aria-hidden="true" class="opening-logo-flight" src="assets/img/logo-vetreria.svg"/></div>
 <header class="top"><a class="brand brand-logo" href="#inizio"><img alt="Dolso &amp; Busatto" src="assets/img/logo-vetreria.svg"/><span class="brand-wordmark">VETRERIA<br/><strong>DOLSO &amp; BUSATTO</strong></span></a><div class="search-shell"><span aria-hidden="true" class="search-magnifier"><svg fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewbox="0 0 24 24" width="19"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg></span><input aria-label="Cerca nel sito" class="search" id="search" placeholder="Cerca una lavorazione…" type="search"/></div><div class="search-results" id="searchResults"></div><button aria-label="Apri il menu" class="menu-btn" id="menuBtn"><span class="menu-label">MENU</span><span aria-hidden="true" class="menu-lines"><i></i><i></i><i></i></span></button></header>
 <div class="veil" id="veil"></div><nav aria-label="Menu di navigazione" class="drawer" id="drawer"><button class="icon-btn close" id="closeMenu">Chiudi ×</button><a href="#chi-siamo">Chi siamo</a><a href="#contatti">Contatti</a><a href="#servizi-di-vetreria">Servizi di vetreria</a><a href="#vetrocamera-e-vetri-speciali">Vetrocamera e vetri speciali</a><a href="#specchi">Specchi</a><a href="#balaustre">Balaustre</a><a href="#pensiline">Pensiline</a><a href="#box-doccia">Box doccia</a><a href="#complementi-d-arredo">Complementi d'arredo</a><a href="#porte-interne">Porte interne</a><a href="#pareti-in-vetro-e-divisori">Pareti in vetro e divisori</a><a href="#stampa-digitale-su-vetro">Stampa digitale su vetro</a><a href="#manutenzione">Manutenzione</a></nav>
 <section class="hero" id="inizio"><div class="hero-copy"><span class="kicker">VETRERIA DOLSO &amp; BUSATTO · POVOLETTO</span><h1>LAVORAZIONI<br/>IN VETRO<br/>SU MISURA</h1><p>Nata nei primi anni '80 a Povoletto, la vetreria è specializzata nel trattamento e nella lavorazione del vetro.</p></div><img alt="Fotografia originale della lavorazione del vetro" class="hero-img" src="assets/img/vetrocamera-e-vetri-speciali/vetrocamera-e-vetri-speciali-02.jpg"/></section><div aria-label="Attività della vetreria" class="capability-strip"><div class="capability-item"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m21.3 8.7-6-6a1 1 0 0 0-1.4 0L2.7 13.9a1 1 0 0 0 0 1.4l6 6a1 1 0 0 0 1.4 0L21.3 10a1 1 0 0 0 0-1.4Z"></path><path d="m7.5 10.5 2 2m1-5 2 2m1-5 2 2m-11 7 2 2"></path></svg><span>LAVORAZIONI SU MISURA</span></div><div class="capability-item"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M2 18h20M4 18v-4a8 8 0 0 1 5-7.4V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.6A8 8 0 0 1 20 14v4M9 6.6V12m6-5.4V12"></path><path d="M4 18v2h16v-2"></path></svg><span>POSA IN OPERA</span></div><div class="capability-item"><svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg><span>ASSISTENZA E RIPARAZIONE</span></div></div>
@@ -566,42 +582,57 @@ search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();i
   section.appendChild(nav);
  });
 })();
-</script><script>
-(()=>{
+</script><script>(()=>{
  const overlay=document.getElementById('opening');
- const logo=overlay?.querySelector('.opening-logo');
+ const scene=overlay?.querySelector('.opening-scene');
+ const left=overlay?.querySelector('.sash-left');
+ const right=overlay?.querySelector('.sash-right');
+ const behind=overlay?.querySelector('.opening-logo-behind');
+ const flyer=overlay?.querySelector('.opening-logo-flight');
  const target=document.querySelector('.brand-logo img');
- if(!overlay||!logo||!target)return;
+ if(!overlay||!scene||!left||!right||!behind||!flyer||!target)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  document.body.classList.add('intro-running');
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
- const finish=()=>{overlay.remove();document.body.classList.remove('intro-running')};
- const animate=(node,frames,opts)=>node.animate(frames,{fill:'forwards',...opts}).finished.catch(()=>{});
- async function run(){
+ const wait=ms=>new Promise(r=>setTimeout(r,ms));
+ const motion=(el,frames,duration,easing='cubic-bezier(.22,.61,.36,1)')=>
+  el.animate(frames,{duration,easing,fill:'forwards'}).finished;
+ const finish=()=>{target.style.visibility='';overlay.remove();document.body.classList.remove('intro-running')};
+ const box=el=>{const r=el.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height,cx:r.x+r.width/2,cy:r.y+r.height/2}};
+ async function play(){
   await Promise.race([document.fonts?.ready||Promise.resolve(),wait(350)]);
-  await wait(reduced?80:240);
-  overlay.classList.add('scene-opening');
-  await wait(reduced?40:1180);
-  overlay.classList.add('scene-reveal');
-  if(!reduced){await animate(logo,[{opacity:0,transform:'translate(-50%,-50%) scale(.91)'},{opacity:1,transform:'translate(-50%,-50%) scale(1)'}],{duration:570,easing:'cubic-bezier(.2,.8,.2,1)'});await wait(260)}
-  else logo.style.opacity='1';
-  // FLIP: il logo vola dalla sua posizione reale al logo della testata, senza scatti.
-  const from=logo.getBoundingClientRect(),to=target.getBoundingClientRect();
-  const sx=to.width/from.width,sy=to.height/from.height;
-  const dx=(to.left+to.width/2)-(from.left+from.width/2);
-  const dy=(to.top+to.height/2)-(from.top+from.height/2);
-  logo.style.opacity='1';
-  const flight=animate(logo,[
-   {transform:'translate(-50%,-50%) translate(0px,0px) scale(1)',opacity:1,offset:0},
-   {transform:`translate(-50%,-50%) translate(${dx*.38}px,${dy*.38}px) scale(${1+(sx-1)*.30})`,opacity:1,offset:.42},
-   {transform:`translate(-50%,-50%) translate(${dx}px,${dy}px) scale(${sx},${sy})`,opacity:1,offset:1}
-  ],{duration:reduced?120:1180,easing:'cubic-bezier(.45,0,.12,1)'});
-  await wait(reduced?20:1020);
-  overlay.classList.add('scene-fade');
-  await flight;
-  await wait(reduced?20:150);
+  if(!target.complete)await Promise.race([new Promise(r=>target.addEventListener('load',r,{once:true})),wait(300)]);
+  const openingDuration=reduced?100:1800;
+  // One synchronized hinge motion for both leaves; no CSS keyframe hand-off.
+  await wait(reduced?0:260);
+  const easing='cubic-bezier(.38,.02,.16,1)';
+  const hinges=Promise.all([
+   motion(left,[{transform:'rotateY(0deg)'},{transform:'rotateY(-106deg)'}],openingDuration,easing),
+   motion(right,[{transform:'rotateY(0deg)'},{transform:'rotateY(106deg)'}],openingDuration,easing),
+   motion(behind,[{filter:'blur(10px)',opacity:.78},{filter:'blur(0px)',opacity:1}],openingDuration,'ease-out')
+  ]);
+  await hinges;
+  // A camera push through the open frame, rather than scaling a screenshot.
+  await motion(scene,[
+   {transform:'translate3d(0,0,0) scale(1)',opacity:1},
+   {transform:'translate3d(0,0,0) scale(1.55)',opacity:1,offset:.42},
+   {transform:'translate3d(0,0,0) scale(2.9)',opacity:0,offset:1}
+  ],reduced?90:1180,'cubic-bezier(.38,.02,.18,1)');
+  scene.style.visibility='hidden';
+  overlay.classList.add('camera-through');
+  // FLIP, in viewport coordinates: a single composited layer travels to the real header logo.
+  const end=box(target);const size=Math.min(innerWidth*.42,innerHeight*.45,430);
+  const start={x:(innerWidth-size)/2,y:(innerHeight-size)/2,w:size,h:size};
+  flyer.style.width=size+'px';flyer.style.height=size+'px';flyer.style.opacity='1';
+  flyer.style.transform=`translate3d(${start.x}px,${start.y}px,0) scale(1)`;
+  target.style.visibility='hidden';
+  const dx=end.x-start.x,dy=end.y-start.y,scale=end.w/size;
+  await motion(flyer,[
+   {transform:`translate3d(${start.x}px,${start.y}px,0) scale(1)`,offset:0},
+   {transform:`translate3d(${start.x+dx*.28}px,${start.y+dy*.16}px,0) scale(${1+(scale-1)*.12})`,offset:.25},
+   {transform:`translate3d(${start.x+dx*.72}px,${start.y+dy*.66}px,0) scale(${1+(scale-1)*.66})`,offset:.72},
+   {transform:`translate3d(${end.x}px,${end.y}px,0) scale(${scale})`,offset:1}
+  ],reduced?100:1450,'cubic-bezier(.42,0,.13,1)');
   finish();
  }
- run().catch(finish);
-})();
-</script></body></html>
+ play().catch(finish);
+})();</script></body></html>
