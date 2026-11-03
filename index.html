@@ -483,6 +483,15 @@ body.crane-running header.top,body.crane-running main,body.crane-running footer{
 body.crane-reveal header.top,body.crane-reveal main,body.crane-reveal footer{transition:opacity 1150ms ease,filter 1150ms ease;opacity:1;filter:blur(0)}
 @media(max-width:600px){#crane-intro .crane-logo{width:min(72vw,300px);height:min(72vw,300px)}#crane-intro .crane-beam{top:45px}}
 @media(prefers-reduced-motion:reduce){body.crane-reveal header.top,body.crane-reveal main,body.crane-reveal footer{transition:none}}
+
+/* Carroponte: il carico resta sempre sotto al gancio. */
+#crane-intro{background:rgba(243,245,247,var(--intro-bg,1));}
+#crane-intro .crane-beam{top:0!important;z-index:10!important;will-change:transform,opacity}
+#crane-intro .crane-trolley{z-index:11!important}
+#crane-intro .crane-cable{z-index:12!important}
+#crane-intro .crane-hook{z-index:13!important}
+#crane-intro .crane-logo{z-index:2!important}
+@media(max-width:600px){#crane-intro .crane-beam{top:0!important}}
 </style></head><body><div aria-hidden="true" id="crane-intro"><div class="crane-beam"><div class="crane-rail"></div><div class="crane-trolley"><div class="crane-wheel crane-wheel-a"></div><div class="crane-wheel crane-wheel-b"></div><div class="crane-cable"></div><div class="crane-hook"><div class="crane-hook-curve"></div></div></div></div><img alt="" class="crane-logo" src="assets/img/logo-vetreria.svg"/></div>
 <header class="top"><a class="brand brand-logo" href="#inizio"><img alt="Dolso &amp; Busatto" src="assets/img/logo-vetreria.svg"/><span class="brand-wordmark">VETRERIA<br/><strong>DOLSO &amp; BUSATTO</strong></span></a><div class="search-shell"><span aria-hidden="true" class="search-magnifier"><svg fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewbox="0 0 24 24" width="19"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg></span><input aria-label="Cerca nel sito" class="search" id="search" placeholder="Cerca una lavorazione…" type="search"/></div><div class="search-results" id="searchResults"></div><button aria-label="Apri il menu" class="menu-btn" id="menuBtn"><span class="menu-label">MENU</span><span aria-hidden="true" class="menu-lines"><i></i><i></i><i></i></span></button></header>
 <div class="veil" id="veil"></div><nav aria-label="Menu di navigazione" class="drawer" id="drawer"><button class="icon-btn close" id="closeMenu">Chiudi ×</button><a href="#chi-siamo">Chi siamo</a><a href="#contatti">Contatti</a><a href="#servizi-di-vetreria">Servizi di vetreria</a><a href="#vetrocamera-e-vetri-speciali">Vetrocamera e vetri speciali</a><a href="#specchi">Specchi</a><a href="#balaustre">Balaustre</a><a href="#pensiline">Pensiline</a><a href="#box-doccia">Box doccia</a><a href="#complementi-d-arredo">Complementi d'arredo</a><a href="#porte-interne">Porte interne</a><a href="#pareti-in-vetro-e-divisori">Pareti in vetro e divisori</a><a href="#stampa-digitale-su-vetro">Stampa digitale su vetro</a><a href="#manutenzione">Manutenzione</a></nav>
@@ -632,49 +641,65 @@ search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();i
 })();
 </script><script>
 (()=>{
-const root=document.getElementById('crane-intro'),logo=root?.querySelector('.crane-logo'),trolley=root?.querySelector('.crane-trolley'),target=document.querySelector('.brand-logo img');
-if(!root||!logo||!trolley||!target)return;
-const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const duration=reduced?300:4800;
-const ease=x=>x*x*(3-2*x),clamp=x=>Math.max(0,Math.min(1,x)),mix=(a,b,t)=>a+(b-a)*t;
-let started=null,done=false;
+const root=document.getElementById('crane-intro'),logo=root?.querySelector('.crane-logo'),
+beam=root?.querySelector('.crane-beam'),trolley=root?.querySelector('.crane-trolley'),
+target=document.querySelector('.brand-logo img');
+if(!root||!logo||!beam||!trolley||!target){root?.remove();return;}
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const duration=reduce?100:5700;
+const clamp=x=>Math.max(0,Math.min(1,x)),smooth=x=>{x=clamp(x);return x*x*(3-2*x)},
+mix=(a,b,t)=>a+(b-a)*t;
+let started=null,finished=false;
 document.body.classList.add('crane-running');
 target.style.visibility='hidden';
-function cleanup(){if(done)return;done=true;target.style.visibility='';document.body.classList.remove('crane-running','crane-reveal');root.remove();}
-function frame(now){
- if(done)return;
- if(started===null)started=now;
- const t=clamp((now-started)/duration);
- const w=logo.offsetWidth,h=logo.offsetHeight;
- const centerX=(innerWidth-w)/2,centerY=(innerHeight-h)/2;
- const dest=target.getBoundingClientRect();
- const beamY=trolley.getBoundingClientRect().top;
- // Lower hook from beam to logo, pause for pickup, then hoist and carry to header.
- const descend=ease(clamp((t-.05)/.25));
- const lift=ease(clamp((t-.39)/.20));
- const travel=ease(clamp((t-.57)/.35));
- const logoTop=centerY;
- const pickupY=logoTop-20;
- const hookY=mix(beamY+44,pickupY,descend);
- const hoistedY=mix(pickupY,Math.max(beamY+60,dest.top-26),lift);
- const finalHookY=mix(hoistedY,dest.top-26,travel);
- const currentHookY=t<.39?hookY:t<.57?hoistedY:finalHookY;
- trolley.style.setProperty('--cable-length',Math.max(0,currentHookY-beamY-44)+'px');
- const move=ease(clamp((t-.48)/.47));
- const x=mix(centerX,dest.left,move),y=mix(centerY,dest.top,move);
- const scale=mix(1,dest.width/w,move);
- logo.style.transform=`translate3d(${x}px,${y}px,0) scale(${scale})`;
- // Trolley stays above the load and travels horizontally to its final x.
- const tx=mix(innerWidth/2,dest.left+dest.width/2,travel);
- trolley.style.left=tx+'px';
- trolley.style.transform='translateX(-50%)';
- if(t>=.53&&!document.body.classList.contains('crane-reveal'))document.body.classList.add('crane-reveal');
- const fade=ease(clamp((t-.55)/.4));
- root.style.background=`rgba(243,245,247,${1-fade})`;
- root.querySelector('.crane-beam').style.opacity=String(1-ease(clamp((t-.83)/.13)));
- if(t>=1)cleanup();else requestAnimationFrame(frame);
+function finish(){
+ if(finished)return;finished=true;
+ target.style.visibility='';
+ document.body.classList.remove('crane-running','crane-reveal');
+ root.remove();
 }
-requestAnimationFrame(frame);
-window.addEventListener('pagehide',cleanup,{once:true});
+if(reduce){finish();return;}
+function animate(now){
+ if(finished)return;
+ if(started===null)started=now;
+ const t=clamp((now-started)/duration),w=logo.offsetWidth,h=logo.offsetHeight;
+ const startX=(innerWidth-w)/2,startY=(innerHeight-h)/2;
+ const dest=target.getBoundingClientRect();
+ // The hook contacts the logo's upper centre; both share one attachment point.
+ const hookGap=14,beamAnchor=65;
+ const descend=smooth((t-.04)/.22);
+ const pickup=smooth((t-.31)/.08);
+ const carry=smooth((t-.39)/.40);
+ const release=smooth((t-.82)/.09);
+ const fade=smooth((t-.44)/.40);
+ // During pickup logo is stationary. During transport hook and logo move together.
+ const x=mix(startX,dest.left,carry);
+ const y=mix(startY,dest.top,carry);
+ const scale=mix(1,Math.max(.01,dest.width/w),carry);
+ const logoCenterX=x+w*scale/2;
+ const logoTop=y;
+ // Hook goes down, stays attached throughout the lift and travel, then retracts.
+ const restingHookY=beamAnchor+10;
+ const pickupHookY=startY-hookGap;
+ const attachedHookY=logoTop-hookGap;
+ let hookY;
+ if(t<.31)hookY=mix(restingHookY,pickupHookY,descend);
+ else if(t<.82)hookY=attachedHookY;
+ else hookY=mix(attachedHookY,restingHookY,release);
+ // Never allow the hook to cross the beam.
+ hookY=Math.max(restingHookY,hookY);
+ trolley.style.left=logoCenterX+'px';
+ trolley.style.setProperty('--cable-length',Math.max(0,hookY-36)+'px');
+ logo.style.transform=`translate3d(${x}px,${y}px,0) scale(${scale})`;
+ // Hook is always rendered in front of the logo; beam remains above all content.
+ root.style.setProperty('--intro-bg',String(1-fade));
+ if(t>.44)document.body.classList.add('crane-reveal');
+ const depart=smooth((t-.90)/.10);
+ beam.style.transform=`translate3d(0,${-85*depart}px,0)`;
+ beam.style.opacity=String(1-depart);
+ if(t>=1)finish();else requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+window.addEventListener('pagehide',finish,{once:true});
 })();
 </script></body></html>
